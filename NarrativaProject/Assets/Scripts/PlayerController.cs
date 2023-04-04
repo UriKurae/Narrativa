@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 
     [Range(1, 10)]
     public float pSpeed = 5f;
+    [Range(1, 10)]
+    public float jumpForce = 5f;
+
     private float fallVelocity = 0f;
     private Vector3 movePlayer;
     public float gravity = 9.8f;
@@ -23,12 +26,15 @@ public class PlayerController : MonoBehaviour
     private Vector3 camRight;
 
 
+    //Variables de animacion
+    public Animator playerAnminControl;
+
 
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<CharacterController>();
-
+        playerAnminControl = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -37,9 +43,11 @@ public class PlayerController : MonoBehaviour
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
 
-        playerInput = new Vector3(horizontalMove,fallVelocity, verticalMove);
+        playerInput = new Vector3(horizontalMove,0, verticalMove);
         // Similar al normalize, sirve para que no pase de 1 la suma de las dos direcciones
         playerInput = Vector3.ClampMagnitude(playerInput,1);
+
+        playerAnminControl.SetFloat("PlayerWalkVel",playerInput.magnitude * pSpeed);
 
         camDirection();
         // Hacer que hacia donde estemos mirando, sea recto para el player
@@ -51,9 +59,20 @@ public class PlayerController : MonoBehaviour
 
 
         SetGravity();
+
+        PlayerSkills(); 
+               
         player.Move(movePlayer * Time.deltaTime);
+    }
 
-
+    private void PlayerSkills()
+    {
+        if (player.isGrounded && Input.GetButtonDown("Jump")) 
+        {
+            fallVelocity = jumpForce;
+            movePlayer.y = jumpForce;
+            playerAnminControl.SetTrigger("PlayerJump");
+        }
     }
 
     private void SetGravity()
@@ -65,8 +84,12 @@ public class PlayerController : MonoBehaviour
         else
         {
             fallVelocity -= gravity * Time.deltaTime;
+            movePlayer.y = fallVelocity;
+            playerAnminControl.SetFloat("PlayerVerticalVel", player.velocity.y);
+
         }
         movePlayer.y = fallVelocity;
+        playerAnminControl.SetBool("IsGrounded", player.isGrounded);
     }
 
     void camDirection()
@@ -79,6 +102,11 @@ public class PlayerController : MonoBehaviour
 
         camForward = camForward.normalized;
         camRight = camRight.normalized;
+    }
+
+    private void OnAnimatorMove()
+    {
+        
     }
 
 }
