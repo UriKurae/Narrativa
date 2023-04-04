@@ -34,8 +34,10 @@ public class ShipController : MonoBehaviour
         {
             var step = velocity * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, points[index].gameObject.transform.position, step);
-            Vector3 direction = (points[index + 1].transform.position - points[index].transform.position).normalized;
-            this.gameObject.transform.rotation = Quaternion.Euler(direction);
+            Vector3 direction = (points[index].transform.position - this.transform.position).normalized;
+
+           
+            this.transform.forward = direction;
 
             if (transform.position == points[index].gameObject.transform.position)
             {
