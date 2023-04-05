@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
 
     [Range(1, 10)]
     public float pSpeed = 5f;
+
+    [Range(5, 15)]
+    public float pSpeedRun = 10f;
+    public float tmpSpeed = 10f;
+
     [Range(1, 10)]
     public float jumpForce = 5f;
 
@@ -47,16 +52,16 @@ public class PlayerController : MonoBehaviour
         // Similar al normalize, sirve para que no pase de 1 la suma de las dos direcciones
         playerInput = Vector3.ClampMagnitude(playerInput,1);
 
-        playerAnminControl.SetFloat("PlayerWalkVel",playerInput.magnitude * pSpeed);
+        playerAnminControl.SetFloat("PlayerWalkVel",playerInput.magnitude * tmpSpeed);
 
         camDirection();
         // Hacer que hacia donde estemos mirando, sea recto para el player
         movePlayer = playerInput.x * camRight + playerInput.z * camForward;
-        movePlayer *= pSpeed;
+        // Velocidad del player
+        movePlayer *= tmpSpeed;
 
         // Mirar hacia la direccion a la que nos vamos a mover
         player.transform.LookAt(player.transform.position+movePlayer);
-
 
         SetGravity();
 
@@ -73,6 +78,17 @@ public class PlayerController : MonoBehaviour
             movePlayer.y = jumpForce;
             playerAnminControl.SetTrigger("PlayerJump");
         }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            tmpSpeed = pSpeedRun;
+        }
+        else
+        {
+            tmpSpeed = pSpeed;
+        }
+        playerAnminControl.SetBool("IsRun", Input.GetKey(KeyCode.LeftShift));
+
+       
     }
 
     private void SetGravity()
