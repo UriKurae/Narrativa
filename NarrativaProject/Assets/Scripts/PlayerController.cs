@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     private float verticalMove;
     private Vector3 playerInput;
 
+    private bool canTriggerDialogue = false;
+    private GameObject npcToDialogue;
+
     private CharacterController player;
 
     [Range(1, 10)]
@@ -68,7 +71,18 @@ public class PlayerController : MonoBehaviour
         PlayerSkills(); 
                
         player.Move(movePlayer * Time.deltaTime);
+
+        if (canTriggerDialogue && Input.GetKey(KeyCode.E))
+        {
+            TriggerDialogue trigger = npcToDialogue.GetComponent<TriggerDialogue>();
+
+            if (trigger)
+            {
+                trigger.StartConversation();
+            }
+        }
     }
+
 
     private void PlayerSkills()
     {
@@ -125,4 +139,26 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Npc")
+        {
+            canTriggerDialogue = true;
+            npcToDialogue = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Npc")
+        {
+            canTriggerDialogue = false;
+            npcToDialogue = null;
+            TriggerDialogue trigger = other.gameObject.GetComponent<TriggerDialogue>();
+            if (trigger)
+            {
+                trigger.EndConversation();
+            }
+        }
+    }
 }

@@ -11,5 +11,10 @@ public class TriggerDialogue : MonoBehaviour
     {
         ConversationManager.Instance.StartConversation(dialogue);
     }
-    
+
+    public void EndConversation()
+    {
+        ConversationManager.Instance.EndConversation();
+    }
+
 }
