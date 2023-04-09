@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InteriorScene.unity
     guid: 79a132571013a604395c6fb38660146f
+  - enabled: 1
+    path: Assets/Scenes/BeachScene.unity
+    guid: ccc1df3e90dcb20478437f9685ff9161
   m_configObjects: {}
