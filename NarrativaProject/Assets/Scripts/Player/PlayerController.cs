@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,6 +35,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 camForward;
     private Vector3 camRight;
 
+    public Image box;
+    public TextMeshProUGUI boxText;
+    private bool showBox = true;
 
     //Variables de animacion
     public Animator playerAnminControl;
@@ -72,14 +77,32 @@ public class PlayerController : MonoBehaviour
                
         player.Move(movePlayer * Time.deltaTime);
 
-        if (canTriggerDialogue && Input.GetKey(KeyCode.E))
+        if (canTriggerDialogue)
         {
-            TriggerDialogue trigger = npcToDialogue.GetComponent<TriggerDialogue>();
-
-            if (trigger)
+            if (showBox)
             {
-                trigger.StartConversation();
+                box.gameObject.SetActive(true);
+                boxText.gameObject.SetActive(true);
             }
+
+            if (Input.GetKey(KeyCode.E))
+            {
+                TriggerDialogue trigger = npcToDialogue.GetComponent<TriggerDialogue>();
+
+                if (trigger)
+                {
+                    trigger.StartConversation();
+
+                    showBox = false;
+                    box.gameObject.SetActive(false);
+                    boxText.gameObject.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            box.gameObject.SetActive(false);
+            boxText.gameObject.SetActive(false);
         }
     }
 
@@ -158,6 +181,7 @@ public class PlayerController : MonoBehaviour
             if (trigger)
             {
                 trigger.EndConversation();
+                showBox = true;
             }
         }
     }
