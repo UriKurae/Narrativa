@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public float gravity = 9.8f;
 
     public Camera mainCamera;
+    public Camera mainCamera2;
     private Vector3 camForward;
     private Vector3 camRight;
 
@@ -134,6 +135,12 @@ public class PlayerController : MonoBehaviour
             verticalActive = false;
             if (!horizontalActive)
                 woodFootsepsFx.Pause();
+        }
+
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            mainCamera.gameObject.SetActive(false);
+            mainCamera2.gameObject.SetActive(true);
         }
     }
 

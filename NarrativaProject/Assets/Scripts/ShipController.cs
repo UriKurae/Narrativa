@@ -8,7 +8,8 @@ public class ShipController : MonoBehaviour
     public enum Stance
     {
         ROAMING = 0,
-        BATTLE
+        BATTLE,
+        NONE
     }
 
     public List<GameObject> points;
@@ -21,7 +22,7 @@ public class ShipController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentStance = Stance.ROAMING;
+        currentStance = Stance.NONE;
         totalPoints = points.Count - 1;
     }
 
@@ -30,7 +31,7 @@ public class ShipController : MonoBehaviour
     {
         if (currentStance == Stance.BATTLE)
             transform.RotateAround(target.transform.position, Vector3.up, -velocity * Time.deltaTime);
-        else
+        else if(currentStance == Stance.ROAMING)
         {
             var step = velocity * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, points[index].gameObject.transform.position, step);
@@ -45,5 +46,7 @@ public class ShipController : MonoBehaviour
                 index = index % totalPoints;
             }
         }
+        
+
     }
 }
