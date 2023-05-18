@@ -9,11 +9,13 @@ public class CannonController : MonoBehaviour
     private Quaternion originalRotation;
     public float force = 10f;
     public float rotationSensitivity = 10f;
+    private AudioSource cannonShootAudio;
     // Start is called before the first frame update
     void Start()
     {
         origin = this.transform.GetChild(0).gameObject;
         originalRotation = this.gameObject.transform.rotation;
+        cannonShootAudio = this.gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,8 @@ public class CannonController : MonoBehaviour
             GameObject it = Instantiate(shootObject, origin.transform.position, gameObject.transform.rotation);
             it.GetComponent<Rigidbody>().AddForce(this.transform.right * force, ForceMode.Impulse);
             Destroy(it, 7.0f);
+
+            cannonShootAudio.Play();
         }
 
         //Rotate Down

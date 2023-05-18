@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI boxText;
     private bool showBox = true;
 
+    private AudioSource woodFootsepsFx;
+    private bool horizontalActive = false;
+    private bool verticalActive = false;
+
     //Variables de animacion
     public Animator playerAnminControl;
 
@@ -48,6 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         player = GetComponent<CharacterController>();
         playerAnminControl = GetComponent<Animator>();
+        woodFootsepsFx = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -103,6 +108,32 @@ public class PlayerController : MonoBehaviour
         {
             box.gameObject.SetActive(false);
             boxText.gameObject.SetActive(false);
+        }
+
+        if (Input.GetButtonDown("Horizontal"))
+        {
+            horizontalActive = true;
+            woodFootsepsFx.Play();
+        }
+
+        if (Input.GetButtonDown("Vertical"))
+        {
+            verticalActive = true;
+            woodFootsepsFx.Play();
+        }
+
+        if (Input.GetButtonUp("Horizontal"))
+        {
+            horizontalActive = false;
+            if (!verticalActive)
+                woodFootsepsFx.Pause();
+        }
+
+        if (Input.GetButtonUp("Vertical"))
+        {
+            verticalActive = false;
+            if (!horizontalActive)
+                woodFootsepsFx.Pause();
         }
     }
 
