@@ -42,12 +42,12 @@ public class KrakenBehaviour : MonoBehaviour
             }
             else if (healthPoints > 50)
             {
-                shotDelay = 1.5f;
+                shotDelay = 2.5f;
 
             }
             else if (healthPoints > 25)
             {
-                shotDelay = 0.5f;
+                shotDelay = 1.5f;
 
             }
         }
@@ -110,6 +110,22 @@ public class KrakenBehaviour : MonoBehaviour
         if (other.gameObject.tag == "Cannon")
         {
             healthPoints -= 1;
+
+            Vector2 curr = healthBar.GetComponent<RectTransform>().sizeDelta;
+            float newHpWidth = healthPoints * 285.0f / 100.0f;
+
+            healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(newHpWidth, curr.y);
+
+            hit = true;
+            if (healthPoints <= 0)
+            {
+                Die();
+            }
+        }
+
+        if (other.gameObject.tag == "Electric")
+        {
+            healthPoints -= 25;
 
             Vector2 curr = healthBar.GetComponent<RectTransform>().sizeDelta;
             float newHpWidth = healthPoints * 285.0f / 100.0f;

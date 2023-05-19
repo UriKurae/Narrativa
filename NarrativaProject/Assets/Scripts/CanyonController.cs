@@ -5,12 +5,15 @@ using UnityEngine;
 public class CanyonController : MonoBehaviour
 {
     public GameObject projectile;
+    public GameObject electricProjectile;
     public float cameraSpeed = 50.0f;
     private bool canyonOrder = true;
 
     public float shotAvailableDelay = 0.2f;
+    public float electricShotAvailableDelay = 15.0f;
 
     public AudioClip[] shotClips;
+    public AudioClip electricClip;
     public AudioSource audioCanyon;
 
     public Transform leftShot;
@@ -43,6 +46,13 @@ public class CanyonController : MonoBehaviour
             ShootProjectile();
         }
 
+        if (Input.GetKeyUp(KeyCode.Mouse1) && electricShotAvailableDelay <= 0.0f)
+        {
+            electricShotAvailableDelay = 15.0f;
+            ShootElectricProjectile();
+        }
+
+        electricShotAvailableDelay -= Time.deltaTime;
         shotAvailableDelay -= Time.deltaTime;
 
     }
@@ -62,6 +72,16 @@ public class CanyonController : MonoBehaviour
         }
 
         audioCanyon.clip = shotClips[Random.Range(0, shotClips.Length)];
+        audioCanyon.Play();
+    }
+
+    public void ShootElectricProjectile()
+    {
+       
+        GameObject shot = Instantiate(electricProjectile, leftShot.position, this.transform.rotation);
+        shot.GetComponent<Rigidbody>().AddForce(this.transform.forward * 20.0f, ForceMode.Impulse);
+
+        audioCanyon.clip = electricClip;
         audioCanyon.Play();
     }
 }

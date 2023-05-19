@@ -40,5 +40,11 @@ public class TintBehaviour : MonoBehaviour
             Destroy(this.gameObject);
             Destroy(other.gameObject);
         }
+
+        if (other.gameObject.tag == "Player")
+        {
+            Destroy(this.gameObject);
+            GameObject.Find("Denki").GetComponent<PlayerController>().GetHit();
+        }
     }
 }

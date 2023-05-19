@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameManager gameManager;
 
     private float horizontalMove;
     private float verticalMove;
@@ -17,7 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController player;
 
-    
+    public int healthPoints = 100;
+    public GameObject healthBar;
 
     [Range(1, 10)]
     public float pSpeed = 5f;
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GetComponent<CharacterController>();
         playerAnminControl = GetComponent<Animator>();
         woodFootsepsFx = GetComponent<AudioSource>();
@@ -146,6 +149,8 @@ public class PlayerController : MonoBehaviour
             mainCamera.gameObject.SetActive(false);
             mainCamera2.gameObject.SetActive(true);
             musicManager.ChangeMainMusic(1);
+            gameManager.StartKrakenGame();
+            
         }
     }
 
@@ -205,6 +210,15 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    public void GetHit()
+    {
+        healthPoints -= 15;
+
+        Vector2 curr = healthBar.GetComponent<RectTransform>().sizeDelta;
+        float newHpWidth = healthPoints * 285.0f / 100.0f;
+
+        healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(newHpWidth, curr.y);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Npc")
