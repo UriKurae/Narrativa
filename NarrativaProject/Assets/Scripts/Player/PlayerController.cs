@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController player;
 
+    
+
     [Range(1, 10)]
     public float pSpeed = 5f;
 
@@ -46,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     //Variables de animacion
     public Animator playerAnminControl;
+
+    public MusicManager musicManager;
 
 
     // Start is called before the first frame update
@@ -141,6 +145,7 @@ public class PlayerController : MonoBehaviour
         {
             mainCamera.gameObject.SetActive(false);
             mainCamera2.gameObject.SetActive(true);
+            musicManager.ChangeMainMusic(1);
         }
     }
 

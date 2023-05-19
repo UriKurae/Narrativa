@@ -6,6 +6,15 @@ public class CanyonController : MonoBehaviour
 {
     public GameObject projectile;
     public float cameraSpeed = 50.0f;
+    private bool canyonOrder = true;
+
+    public float shotAvailableDelay = 0.2f;
+
+    public AudioClip[] shotClips;
+    public AudioSource audioCanyon;
+
+    public Transform leftShot;
+    public Transform rightShot;
    
     // Update is called once per frame
     void Update()
@@ -28,15 +37,31 @@ public class CanyonController : MonoBehaviour
             this.gameObject.transform.Rotate(cameraSpeed * Time.deltaTime, 0.0f, 0.0f);
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0) && shotAvailableDelay <= 0.0f)
         {
+            shotAvailableDelay = 0.2f;
             ShootProjectile();
         }
+
+        shotAvailableDelay -= Time.deltaTime;
+
     }
 
     public void ShootProjectile()
     {
-        GameObject shot = Instantiate(projectile, this.transform.position, this.transform.rotation);
-        shot.GetComponent<Rigidbody>().AddForce(this.transform.forward * 20.0f, ForceMode.Impulse);
+        canyonOrder = !canyonOrder;
+        if (canyonOrder)
+        {
+            GameObject shot = Instantiate(projectile, leftShot.position, this.transform.rotation);
+            shot.GetComponent<Rigidbody>().AddForce(this.transform.forward * 20.0f, ForceMode.Impulse);
+        }
+        else
+        {
+            GameObject shot = Instantiate(projectile, rightShot.position, this.transform.rotation);
+            shot.GetComponent<Rigidbody>().AddForce(this.transform.forward * 20.0f, ForceMode.Impulse);
+        }
+
+        audioCanyon.clip = shotClips[Random.Range(0, shotClips.Length)];
+        audioCanyon.Play();
     }
 }

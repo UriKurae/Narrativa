@@ -5,6 +5,10 @@ using UnityEngine;
 public class TintBehaviour : MonoBehaviour
 {
     public GameObject target;
+    public GameObject rocket;
+
+    public float rotationSpeedProjectile = 300.0f;
+    public float SpeedProjectile = 10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +20,9 @@ public class TintBehaviour : MonoBehaviour
     void Update()
     {
         this.transform.LookAt(target.transform);
-        this.transform.Translate(0.0f, 0.0f, 20.0f * Time.deltaTime);
+        this.transform.Translate(0.0f, 0.0f, SpeedProjectile * Time.deltaTime);
+
+        rocket.transform.RotateAround(this.transform.position, this.transform.forward, 300.0f * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
