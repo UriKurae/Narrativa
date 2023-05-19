@@ -38,7 +38,6 @@ public class TintBehaviour : MonoBehaviour
         if (other.gameObject.tag == "Cannon")
         {
             Destroy(this.gameObject);
-            Destroy(other.gameObject);
         }
 
         if (other.gameObject.tag == "Player")

@@ -218,6 +218,11 @@ public class PlayerController : MonoBehaviour
         float newHpWidth = healthPoints * 285.0f / 100.0f;
 
         healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(newHpWidth, curr.y);
+
+        if (healthPoints <= 0)
+        {
+            gameManager.EndGame();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

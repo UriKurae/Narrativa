@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class KrakenBehaviour : MonoBehaviour
 {
+    public GameObject soulEffect;
+
+
     public float shotDelay = 3.0f;
     public GameObject tint;
     public Transform shootLocationRight;
@@ -25,6 +28,7 @@ public class KrakenBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        soulEffect.SetActive(false);
         anim = GetComponent<Animator>();
     }
 
@@ -49,6 +53,10 @@ public class KrakenBehaviour : MonoBehaviour
             {
                 shotDelay = 1.5f;
 
+            }
+            else
+            {
+                shotDelay = 1.0f;
             }
         }
 
@@ -147,6 +155,9 @@ public class KrakenBehaviour : MonoBehaviour
     private void Die()
     {
         alive = false;
+        this.GetComponent<Collider>().enabled = false;
         anim.SetTrigger("Die");
+        soulEffect.SetActive(true);
+        soulEffect.GetComponent<ParticleSystem>().Play();
     }
 }
