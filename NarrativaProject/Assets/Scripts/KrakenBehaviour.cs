@@ -7,6 +7,7 @@ public class KrakenBehaviour : MonoBehaviour
 {
     public GameObject soulEffect;
 
+    bool cinematic = false;
 
     public float shotDelay = 3.0f;
     public GameObject tint;
@@ -35,53 +36,62 @@ public class KrakenBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        shotDelay -= Time.deltaTime;
-
-        if (shotDelay <= 0.0f && alive)
+        if (cinematic)
         {
-            ShootTint();
-            if (healthPoints > 75)
+            transform.Translate(0.0f, 4.0f * Time.deltaTime, 0.0f);
+            if (transform.position.y >= -90.0f)
             {
-                shotDelay = 3.0f;
-            }
-            else if (healthPoints > 50)
-            {
-                shotDelay = 2.5f;
-
-            }
-            else if (healthPoints > 25)
-            {
-                shotDelay = 1.5f;
-
-            }
-            else
-            {
-                shotDelay = 1.0f;
+                cinematic = false;
             }
         }
-
-
-        if (hit && changedImage == false)
+        else
         {
-            imageKraken.GetComponent<Image>().sprite = images[1];
-            delayHit = 0.1f;
-            changedImage = true;
+            shotDelay -= Time.deltaTime;
+
+            if (shotDelay <= 0.0f && alive)
+            {
+                ShootTint();
+                if (healthPoints > 75)
+                {
+                    shotDelay = 3.0f;
+                }
+                else if (healthPoints > 50)
+                {
+                    shotDelay = 2.5f;
+
+                }
+                else if (healthPoints > 25)
+                {
+                    shotDelay = 1.5f;
+
+                }
+                else
+                {
+                    shotDelay = 1.0f;
+                }
+            }
+
+
+            if (hit && changedImage == false)
+            {
+                imageKraken.GetComponent<Image>().sprite = images[1];
+                delayHit = 0.1f;
+                changedImage = true;
+            }
+
+            if (changedImage)
+            {
+
+                delayHit -= 0.25f * Time.deltaTime;
+            }
+
+            if (delayHit <= 0.0f)
+            {
+                hit = false;
+                changedImage = false;
+                imageKraken.GetComponent<Image>().sprite = images[0];
+            }
         }
-
-        if (changedImage)
-        {
-
-            delayHit -= 0.25f * Time.deltaTime;
-        }
-
-        if (delayHit <= 0.0f)
-        {
-            hit = false;
-            changedImage = false;
-            imageKraken.GetComponent<Image>().sprite = images[0];
-        }
-       
-
     }
 
     public void ShootTint()
@@ -159,5 +169,12 @@ public class KrakenBehaviour : MonoBehaviour
         anim.SetTrigger("Die");
         soulEffect.SetActive(true);
         soulEffect.GetComponent<ParticleSystem>().Play();
+    }
+
+    public void Cinematic()
+    {
+        anim.SetTrigger("Intimidate_3");
+        cinematic = true;
+       
     }
 }

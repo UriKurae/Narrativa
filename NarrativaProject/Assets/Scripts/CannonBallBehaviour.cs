@@ -25,12 +25,16 @@ public class CannonBallBehaviour : MonoBehaviour
        {
             effect.SetActive(true);
             effect.gameObject.GetComponent<ParticleSystem>().Play();
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<Collider>().enabled = false;
             Destroy(this.gameObject, 5.0f);
        }
         if (other.gameObject.tag == "Tint")
         {
             tintEffect.SetActive(true);
             tintEffect.gameObject.GetComponent<ParticleSystem>().Play();
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<Collider>().enabled = false;
             Destroy(this.gameObject, 5.0f);
         }
     }

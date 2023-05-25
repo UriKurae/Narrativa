@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject kraken;
     public GameObject[] uiToDeactivate;
+    public GameObject cameraCanyon;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,8 @@ public class GameManager : MonoBehaviour
             uiToDeactivate[i].SetActive(true);
         }
         kraken.SetActive(true);
+        kraken.GetComponent<KrakenBehaviour>().Cinematic();
+        cameraCanyon.GetComponent<CanyonController>().StartShake(7.0f);
     }
 
     public void EndGame()

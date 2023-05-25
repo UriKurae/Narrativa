@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class CanyonController : MonoBehaviour
 {
+    // Camera shake
+    public float shakeDuration = 0f;
+
+    // Amplitude of the shake. A larger value shakes the camera harder.
+    public float shakeAmount = 0.7f;
+    public float decreaseFactor = 1.0f;
+    Vector3 originalPos;
+
+
     public GameObject projectile;
     public GameObject electricProjectile;
     public float cameraSpeed = 50.0f;
@@ -18,10 +27,27 @@ public class CanyonController : MonoBehaviour
 
     public Transform leftShot;
     public Transform rightShot;
-   
+
+    private void Start()
+    {
+        originalPos = this.transform.localPosition;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (shakeDuration > 0)
+        {
+            this.transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+
+            shakeDuration -= Time.deltaTime * decreaseFactor;
+        }
+        else
+        {
+            shakeDuration = 0f;
+            this.transform.localPosition = originalPos;
+        }
+
         if (Input.GetKey(KeyCode.A))
         {
             this.gameObject.transform.Rotate(0.0f, -cameraSpeed * Time.deltaTime, 0.0f);
@@ -83,5 +109,10 @@ public class CanyonController : MonoBehaviour
 
         audioCanyon.clip = electricClip;
         audioCanyon.Play();
+    }
+
+    public void StartShake(float duration)
+    {
+        shakeDuration = duration;
     }
 }
