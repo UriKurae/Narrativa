@@ -20,6 +20,7 @@ public class CanyonController : MonoBehaviour
 
     public float shotAvailableDelay = 0.2f;
     public float electricShotAvailableDelay = 15.0f;
+    public bool electricShotAvailable = false;
 
     public AudioClip[] shotClips;
     public AudioClip electricClip;
@@ -72,7 +73,7 @@ public class CanyonController : MonoBehaviour
             ShootProjectile();
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse1) && electricShotAvailableDelay <= 0.0f)
+        if (electricShotAvailable && Input.GetKeyUp(KeyCode.Mouse1) && electricShotAvailableDelay <= 0.0f)
         {
             electricShotAvailableDelay = 15.0f;
             ShootElectricProjectile();
@@ -115,4 +116,6 @@ public class CanyonController : MonoBehaviour
     {
         shakeDuration = duration;
     }
+
+ 
 }

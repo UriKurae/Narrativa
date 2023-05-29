@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private float verticalMove;
     private Vector3 playerInput;
 
+    public bool canInteract = true;
+
     private bool canTriggerDialogue = false;
     private GameObject npcToDialogue;
 
@@ -61,6 +63,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canInteract)
+            return;
+
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
 
