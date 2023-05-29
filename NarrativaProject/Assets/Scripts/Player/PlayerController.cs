@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameManager gameManager;
-
     private float horizontalMove;
     private float verticalMove;
     private Vector3 playerInput;
@@ -36,7 +34,6 @@ public class PlayerController : MonoBehaviour
     public float gravity = 9.8f;
 
     public Camera mainCamera;
-    public Camera mainCamera2;
     private Vector3 camForward;
     private Vector3 camRight;
 
@@ -51,13 +48,11 @@ public class PlayerController : MonoBehaviour
     //Variables de animacion
     public Animator playerAnminControl;
 
-    public MusicManager musicManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GetComponent<CharacterController>();
         playerAnminControl = GetComponent<Animator>();
         woodFootsepsFx = GetComponent<AudioSource>();
@@ -143,15 +138,6 @@ public class PlayerController : MonoBehaviour
             if (!horizontalActive)
                 woodFootsepsFx.Pause();
         }
-
-        if (Input.GetKeyUp(KeyCode.P))
-        {
-            mainCamera.gameObject.SetActive(false);
-            mainCamera2.gameObject.SetActive(true);
-            musicManager.ChangeMainMusic(1);
-            gameManager.StartKrakenGame();
-            
-        }
     }
 
 
@@ -221,7 +207,7 @@ public class PlayerController : MonoBehaviour
 
         if (healthPoints <= 0)
         {
-            gameManager.EndGame();
+            GameObject.Find("GameManager").GetComponent<GameManager>().EndGame();
         }
     }
     private void OnTriggerEnter(Collider other)
