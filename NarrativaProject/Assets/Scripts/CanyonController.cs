@@ -15,6 +15,7 @@ public class CanyonController : MonoBehaviour
 
     public GameObject projectile;
     public GameObject electricProjectile;
+    public bool electricShotUnlocked = false;
     public float cameraSpeed = 50.0f;
     private bool canyonOrder = true;
 
@@ -72,7 +73,7 @@ public class CanyonController : MonoBehaviour
             ShootProjectile();
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse1) && electricShotAvailableDelay <= 0.0f)
+        if (electricShotUnlocked && Input.GetKeyUp(KeyCode.Mouse1) && electricShotAvailableDelay <= 0.0f)
         {
             electricShotAvailableDelay = 15.0f;
             ShootElectricProjectile();
