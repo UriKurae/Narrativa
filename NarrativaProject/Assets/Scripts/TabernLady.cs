@@ -23,13 +23,13 @@ public class TabernLady : MonoBehaviour
         {
             if (fadeIn)
             {
-                float canvas = blackScreen.GetComponent<Image>().material.color.a;             
+                float canvas = blackScreen.GetComponent<Image>().color.a;             
 
                 float a = (canvas + Time.deltaTime / 2.0f);
 
-                Color test = blackScreen.GetComponent<Image>().material.color;
+                Color test = blackScreen.GetComponent<Image>().color;
 
-                blackScreen.GetComponent<Image>().material.color = new Color(test.r, test.g, test.b, a);
+                blackScreen.GetComponent<Image>().color = new Color(test.r, test.g, test.b, a);
                 if (a >= 1.0f)
                 {
                     fadeIn = false;
@@ -39,13 +39,13 @@ public class TabernLady : MonoBehaviour
 
             if (fadeOut)
             {
-                float canvas = blackScreen.GetComponent<Image>().material.color.a;
+                float canvas = blackScreen.GetComponent<Image>().color.a;
 
                 float a = (canvas - Time.deltaTime / 2.0f);
 
-                Color test = blackScreen.GetComponent<Image>().material.color;
+                Color test = blackScreen.GetComponent<Image>().color;
 
-                blackScreen.GetComponent<Image>().material.color = new Color(test.r, test.g, test.b, a);
+                blackScreen.GetComponent<Image>().color = new Color(test.r, test.g, test.b, a);
                 if (a <= 0.0f)
                 {
                     fadeIn = false;
@@ -62,7 +62,7 @@ public class TabernLady : MonoBehaviour
     public void Sleep()
     {
         blackScreen.SetActive(true);
-        blackScreen.GetComponent<Image>().material.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        blackScreen.GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
         sleep = true;
         fadeIn = true;
         fadeOut = false;
