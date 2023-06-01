@@ -10,9 +10,28 @@ public class TransitionManager : MonoBehaviour
     public TextMeshProUGUI progressText;
     public Slider progressSlider;
 
+    bool fadeRequested = false;
+    public GameObject transitionCanvas;
+    bool fadeIn = false;
+    bool fadeOut = false;
+
+    [HideInInspector]
+    public bool fading = false;
+
+    private void Start()
+    {
+        transitionCanvas.gameObject.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (fadeRequested)
+        {
+            transitionCanvas.SetActive(true);
+            Fade();
+        }
+
         if (Input.GetKeyDown(KeyCode.L))
             StartCoroutine(LoadNewScene());
 
@@ -50,5 +69,50 @@ public class TransitionManager : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    public void RequestFade()
+    {
+        fadeRequested = true;
+        fadeIn = true;
+        fading = true;
+    }
+    void Fade()
+    {
+        if (fadeIn)
+        {
+            float canvas = transitionCanvas.GetComponent<Image>().color.a;
+
+            float a = (canvas + Time.deltaTime / 2.0f);
+
+            Color test = transitionCanvas.GetComponent<Image>().color;
+
+            transitionCanvas.GetComponent<Image>().color = new Color(test.r, test.g, test.b, a);
+            if (a >= 1.0f)
+            {
+                fadeIn = false;
+                fadeOut = true;
+            }
+        }
+
+        if (fadeOut)
+        {
+            float canvas = transitionCanvas.GetComponent<Image>().color.a;
+
+            float a = (canvas - Time.deltaTime / 2.0f);
+
+            Color test = transitionCanvas.GetComponent<Image>().color;
+
+            transitionCanvas.GetComponent<Image>().color = new Color(test.r, test.g, test.b, a);
+            if (a <= 0.0f)
+            {
+                fadeIn = false;
+                fadeOut = false;
+                transitionCanvas.SetActive(false);
+                fading = false;
+            }
+        }
+
+       
     }
 }

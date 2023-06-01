@@ -29,6 +29,12 @@ public class CanyonController : MonoBehaviour
     public Transform leftShot;
     public Transform rightShot;
 
+    public GameObject topBlack;
+    public GameObject bottomBlack;
+
+    private bool cinematicCamera = false;
+    private float timeToDeactivate = 9.0f;
+
     private void Start()
     {
         originalPos = this.transform.localPosition;
@@ -49,39 +55,51 @@ public class CanyonController : MonoBehaviour
             this.transform.localPosition = originalPos;
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (cinematicCamera)
         {
-            this.gameObject.transform.Rotate(0.0f, -cameraSpeed * Time.deltaTime, 0.0f);
+            timeToDeactivate -= Time.deltaTime;
+            if (timeToDeactivate <= 0.0f)
+            {
+                cinematicCamera = false;
+                topBlack.SetActive(false);
+                bottomBlack.SetActive(false);
+            }
         }
-        if (Input.GetKey(KeyCode.D))
+        else if (!cinematicCamera)
         {
-            this.gameObject.transform.Rotate(0.0f, cameraSpeed * Time.deltaTime, 0.0f);
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                this.gameObject.transform.Rotate(0.0f, -cameraSpeed * Time.deltaTime, 0.0f);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                this.gameObject.transform.Rotate(0.0f, cameraSpeed * Time.deltaTime, 0.0f);
+            }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            this.gameObject.transform.Rotate(-cameraSpeed * Time.deltaTime, 0.0f, 0.0f);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            this.gameObject.transform.Rotate(cameraSpeed * Time.deltaTime, 0.0f, 0.0f);
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                this.gameObject.transform.Rotate(-cameraSpeed * Time.deltaTime, 0.0f, 0.0f);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                this.gameObject.transform.Rotate(cameraSpeed * Time.deltaTime, 0.0f, 0.0f);
+            }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) && shotAvailableDelay <= 0.0f)
-        {
-            shotAvailableDelay = 0.2f;
-            ShootProjectile();
+            if (Input.GetKeyUp(KeyCode.Mouse0) && shotAvailableDelay <= 0.0f)
+            {
+                shotAvailableDelay = 0.2f;
+                ShootProjectile();
+            }
+
+            if (electricShotAvailable && Input.GetKeyUp(KeyCode.Mouse1) && electricShotAvailableDelay <= 0.0f)
+            {
+                electricShotAvailableDelay = 15.0f;
+                ShootElectricProjectile();
+            }
+
+            electricShotAvailableDelay -= Time.deltaTime;
+            shotAvailableDelay -= Time.deltaTime;
         }
-
-        if (electricShotAvailable && Input.GetKeyUp(KeyCode.Mouse1) && electricShotAvailableDelay <= 0.0f)
-        {
-            electricShotAvailableDelay = 15.0f;
-            ShootElectricProjectile();
-        }
-
-        electricShotAvailableDelay -= Time.deltaTime;
-        shotAvailableDelay -= Time.deltaTime;
-
     }
 
     public void ShootProjectile()
@@ -117,5 +135,11 @@ public class CanyonController : MonoBehaviour
         shakeDuration = duration;
     }
 
+    public void CinematicCamera()
+    {
+        cinematicCamera = true;
+        topBlack.SetActive(true);
+        bottomBlack.SetActive(true);
+    }
  
 }

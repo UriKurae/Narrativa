@@ -15,6 +15,7 @@ public class KrakenBehaviour : MonoBehaviour
     public Transform shootLocationLeft;
     public Transform shootLocationMiddle;
     public Transform shootLocationTop;
+    private bool canShoot = false;
     private Animator anim;
 
     private float delayHit = 0.0f;
@@ -42,9 +43,10 @@ public class KrakenBehaviour : MonoBehaviour
             if (transform.position.y >= -90.0f)
             {
                 cinematic = false;
+                canShoot = true;
             }
         }
-        else
+        else if (!cinematic && canShoot)
         {
             shotDelay -= Time.deltaTime;
 
@@ -53,16 +55,16 @@ public class KrakenBehaviour : MonoBehaviour
                 ShootTint();
                 if (healthPoints > 75)
                 {
-                    shotDelay = 3.0f;
+                    shotDelay = 2.5f;
                 }
                 else if (healthPoints > 50)
                 {
-                    shotDelay = 2.5f;
+                    shotDelay = 1.5f;
 
                 }
                 else if (healthPoints > 25)
                 {
-                    shotDelay = 1.5f;
+                    shotDelay = 1.0f;
 
                 }
                 else
@@ -175,6 +177,5 @@ public class KrakenBehaviour : MonoBehaviour
     {
         anim.SetTrigger("Intimidate_3");
         cinematic = true;
-       
     }
 }
