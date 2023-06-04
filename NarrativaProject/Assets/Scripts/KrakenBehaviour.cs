@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class KrakenBehaviour : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class KrakenBehaviour : MonoBehaviour
 
     public bool alive = true;
     public int healthPoints = 100;
+
+    private bool endGame = false;
+    private float timeToEndGame = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +97,12 @@ public class KrakenBehaviour : MonoBehaviour
                 changedImage = false;
                 imageKraken.GetComponent<Image>().sprite = images[0];
             }
+
+            if (endGame == true)
+                timeToEndGame += Time.deltaTime;
+
+            if (timeToEndGame >= 5f)
+                SceneManager.LoadScene(4);
         }
     }
 
@@ -171,6 +181,8 @@ public class KrakenBehaviour : MonoBehaviour
         anim.SetTrigger("Die");
         soulEffect.SetActive(true);
         soulEffect.GetComponent<ParticleSystem>().Play();
+
+        endGame = true;
     }
 
     public void Cinematic()
