@@ -12,6 +12,7 @@ public class CreditsScene : MonoBehaviour
     public TextMeshProUGUI credits;
     public float speed;
     private bool stopCredits = false;
+    private float timer = 0;
 
     void Update()
     {
@@ -19,8 +20,10 @@ public class CreditsScene : MonoBehaviour
         if (!stopCredits)
             credits.transform.Translate(0, -speed * Time.deltaTime, 0);
 
-        if (credits.transform.position.y <= 730)
+        if (timer >= 7.5)
             stopCredits = true;
+
+        timer += 1 * Time.deltaTime;
     }
 
     public void PlayAgain()
