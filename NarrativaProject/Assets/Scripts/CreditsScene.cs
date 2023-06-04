@@ -13,13 +13,6 @@ public class CreditsScene : MonoBehaviour
     public float speed;
     private bool stopCredits = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
 
