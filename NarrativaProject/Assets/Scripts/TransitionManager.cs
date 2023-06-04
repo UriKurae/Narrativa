@@ -18,6 +18,17 @@ public class TransitionManager : MonoBehaviour
     [HideInInspector]
     public bool fading = false;
 
+
+    public enum TypeScene
+    {
+        BEACH_S = 1,
+        SHIP_S = 2,
+        INSIDE_SHIP_S = 3
+
+    }
+
+    TypeScene requestScene = TypeScene.BEACH_S;
+
     private void Start()
     {
         transitionCanvas.gameObject.SetActive(false);
@@ -30,22 +41,23 @@ public class TransitionManager : MonoBehaviour
         {
             transitionCanvas.SetActive(true);
             Fade();
-        }
 
-        if (Input.GetKeyDown(KeyCode.L))
-            StartCoroutine(LoadNewScene());
 
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            ChangeScene("InteriorScene");
-        }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            ChangeScene("BeachScene");
-        }
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            ChangeScene("ShipScene");
+            if (Input.GetKeyDown(KeyCode.L))
+                StartCoroutine(LoadNewScene());
+
+            if (Input.GetKeyDown(KeyCode.F1) || requestScene == TypeScene.INSIDE_SHIP_S)
+            {
+                ChangeScene("InteriorScene");
+            }
+            if (Input.GetKeyDown(KeyCode.F2) || requestScene == TypeScene.BEACH_S)
+            {
+                ChangeScene("BeachScene");
+            }
+            if (Input.GetKeyDown(KeyCode.F3) || requestScene == TypeScene.SHIP_S)
+            {
+                ChangeScene("ShipScene");
+            }
         }
 
     }
@@ -77,6 +89,15 @@ public class TransitionManager : MonoBehaviour
         fadeIn = true;
         fading = true;
     }
+
+    public void SelectChangeScene(int scene)
+    {
+
+        requestScene = (TypeScene)scene;
+        RequestFade();
+
+    }
+
     void Fade()
     {
         if (fadeIn)
@@ -113,6 +134,6 @@ public class TransitionManager : MonoBehaviour
             }
         }
 
-       
+
     }
 }
