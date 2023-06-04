@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.3722973, g: 0.68280774, b: 0.87282586, a: 1}
+  m_IndirectSpecularColor: {r: 0.3722968, g: 0.6828077, b: 0.87282574, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -82241,6 +82241,22 @@ PrefabInstance:
     - target: {fileID: 1253252997495286164, guid: 28ab203a6204400b853fcf56294ef10b, type: 3}
       propertyPath: windZone
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253252997495286164, guid: 28ab203a6204400b853fcf56294ef10b, type: 3}
+      propertyPath: rotateSpeed.x
+      value: 2.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253252997495286164, guid: 28ab203a6204400b853fcf56294ef10b, type: 3}
+      propertyPath: rotateSpeed.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253252997495286164, guid: 28ab203a6204400b853fcf56294ef10b, type: 3}
+      propertyPath: rotateDistance.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253252997495286164, guid: 28ab203a6204400b853fcf56294ef10b, type: 3}
+      propertyPath: rotateDistance.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1253252997495286165, guid: 28ab203a6204400b853fcf56294ef10b, type: 3}
       propertyPath: m_Name

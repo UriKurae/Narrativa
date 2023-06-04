@@ -143,7 +143,7 @@ Material:
     - _Albedo2Flow: 0.9
     - _Albedo2Tiling: 0.9
     - _AlbedoContrast: 0.13
-    - _AlbedoIntensity: 4.2
+    - _AlbedoIntensity: 1.06
     - _Brightness: 1
     - _BumpScale: 1
     - _Contrast: 1
@@ -169,7 +169,7 @@ Material:
     - _FoamScale: 0.1
     - _GlossAmount: 0.03
     - _GlossMapScale: 1
-    - _Glossiness: 0.75
+    - _Glossiness: 0.859
     - _GlossyReflections: 1
     - _Intensity: 2
     - _IntensityMicrowave: 0.68
@@ -180,13 +180,13 @@ Material:
     - _InvFade: 0
     - _MainDetailFlow: 1
     - _MainDetailScale: 1
-    - _Metallic: 1.3
-    - _MicrowaveScale: 1.46
-    - _MicrowaveStrength: 0.109
+    - _Metallic: 1.238
+    - _MicrowaveScale: 1.49
+    - _MicrowaveStrength: 0.72
     - _MinuteDetailIntensity: 1.455
     - _MinuteDetailScrollSpeed: 0.089
     - _MirrorContrast: 0.05
-    - _MirrorFPOW: 5
+    - _MirrorFPOW: 4
     - _MirrorR0: 0.01
     - _MirrorSaturation: 0.1
     - _MirrorStrength: 0.11
@@ -196,7 +196,7 @@ Material:
     - _Mitigation: 22.4
     - _Mode: 0
     - _NormalDetailFlow: 1
-    - _NormalMap1Strength: 5
+    - _NormalMap1Strength: 8.62
     - _NormalMap2Flow: -0.2
     - _NormalMap2Strength: 0.001
     - _NormalMap2Tiling: 1.2
@@ -209,13 +209,13 @@ Material:
     - _ParallaxAmount: 0.2
     - _ParallaxFlow: 40
     - _ParallaxMapTiling: 0.51
-    - _ParallaxNoiseAmplitude: 1.06
-    - _ParallaxNoiseFrequency: 0.55
-    - _ParallaxNoiseGain: 0.543
-    - _ParallaxNoiseLacunarity: 4.71
+    - _ParallaxNoiseAmplitude: 2
+    - _ParallaxNoiseFrequency: 0.93
+    - _ParallaxNoiseGain: 0.67
+    - _ParallaxNoiseLacunarity: 1.85
     - _ParallaxNoiseOctaves: 5
     - _ParallaxNoiseScale: 1
-    - _ParallaxNormal2Offset: 2
+    - _ParallaxNormal2Offset: 1
     - _ParallaxScale: 0.51
     - _Radius: 1
     - _Reflect: 1
@@ -225,7 +225,7 @@ Material:
     - _Saturation: 1
     - _Shininess: 0.157
     - _SmoothnessTextureChannel: 0
-    - _SoftFactor: 0.415
+    - _SoftFactor: 0.58
     - _SpecularHighlights: 1
     - _Speed: 0.5
     - _SpeedX: 0.1
