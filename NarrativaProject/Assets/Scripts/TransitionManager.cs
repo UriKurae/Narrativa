@@ -42,26 +42,25 @@ public class TransitionManager : MonoBehaviour
         {
             transitionCanvas.SetActive(true);
             Fade();
-
-            if (requestScene != TypeScene.DEFAULT)
-            {
-                if (Input.GetKeyDown(KeyCode.L))
-                    StartCoroutine(LoadNewScene());
-
-                if (Input.GetKeyDown(KeyCode.F1) || requestScene == TypeScene.INSIDE_SHIP_S)
-                {
-                    ChangeScene("InteriorScene");
-                }
-                if (Input.GetKeyDown(KeyCode.F2) || requestScene == TypeScene.BEACH_S)
-                {
-                    ChangeScene("BeachScene");
-                }
-                if (Input.GetKeyDown(KeyCode.F3) || requestScene == TypeScene.SHIP_S)
-                {
-                    ChangeScene("ShipScene");
-                }
-            }
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+            StartCoroutine(LoadNewScene());
+
+        if (Input.GetKeyDown(KeyCode.F1) || requestScene == TypeScene.INSIDE_SHIP_S)
+        {
+            ChangeScene("InteriorScene");
+        }
+        if (Input.GetKeyDown(KeyCode.F2) || requestScene == TypeScene.BEACH_S)
+        {
+            ChangeScene("BeachScene");
+        }
+        if (Input.GetKeyDown(KeyCode.F3) || requestScene == TypeScene.SHIP_S)
+        {
+            ChangeScene("ShipScene");
+        }
+
+
 
     }
 
