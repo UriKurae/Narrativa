@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.3722968, g: 0.6828077, b: 0.87282574, a: 1}
+  m_IndirectSpecularColor: {r: 0.3722973, g: 0.68280774, b: 0.87282586, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -54066,7 +54066,7 @@ PrefabInstance:
       objectReference: {fileID: 1572227818}
     - target: {fileID: 1051819667, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
       propertyPath: healthPoints
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1051819672, guid: 4e7afdf31c20ebf419ea38bf1d358719, type: 3}
       propertyPath: m_Size.x

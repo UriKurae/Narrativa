@@ -102,7 +102,7 @@ public class KrakenBehaviour : MonoBehaviour
                 timeToEndGame += Time.deltaTime;
 
             if (timeToEndGame >= 5f)
-                SceneManager.LoadScene(4);
+                SceneManager.LoadScene("CreditsScene");
         }
     }
 
