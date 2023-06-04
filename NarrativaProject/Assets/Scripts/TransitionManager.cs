@@ -27,7 +27,7 @@ public class TransitionManager : MonoBehaviour
 
     }
 
-    TypeScene requestScene = TypeScene.BEACH_S;
+    TypeScene requestScene = TypeScene.SHIP_S;
 
     private void Start()
     {
