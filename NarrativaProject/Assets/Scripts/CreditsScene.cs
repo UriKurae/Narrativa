@@ -25,7 +25,7 @@ public class CreditsScene : MonoBehaviour
 
     public void PlayAgain()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Introduction");
     }
 
     public void Quit()
